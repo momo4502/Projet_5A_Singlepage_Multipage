@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Settings</title>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <Body>
+        <div class="nav">
+            <div id="advice-container">
+                <p>{advice}</p>
+            </div>
+            <nav>
+                <a href="accueil.html" class="nav_link">Accueil</a>
+                <a href="settings.html" class="nav_link">Settings</a>
+                <a href="posts.html" class="nav_link">Posts</a>
+            </nav>
+        </div>
+        <div class="page">
+            <h1>Settings</h1>
+            <p>Hi there, Here you modify your configuration.</p>
+        </div>
+        <script defer>
+            const adviceContainer = document.getElementById('advice-container');
+
+            const fetchData = async () => {
+                try {
+                    const response = await fetch('https://api.adviceslip.com/advice');
+                    const data = await response.json();
+                    adviceContainer.innerHTML = `<p>${data.slip.advice}</p>`;
+                } catch (error) {
+                    console.error('Error fetching advice:', error);
+                }
+            };
+
+            fetchData();
+        </script>
+    </Body>
+</html>
